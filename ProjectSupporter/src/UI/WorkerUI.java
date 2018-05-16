@@ -1,13 +1,7 @@
 package UI;
 
 import java.awt.event.*;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.Socket;
-
 import javax.swing.*;
-
-import Common.Data;
 import DAO.WorkerDAO;
 import VO.Room;
 import VO.Worker;

@@ -46,4 +46,4 @@ create sequence joinwork_seq
 select * from room
 select * from work
 select * from worker
-drop table work
+drop table room

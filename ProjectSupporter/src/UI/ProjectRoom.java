@@ -11,7 +11,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-import Common.Data;
 import DAO.WorkDAO;
 import DAO.WorkerDAO;
 import VO.Room;
@@ -154,8 +153,8 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 			Work work = new Work(); 
 			System.out.println(list.getSelectedIndex());
 			work = dao1.WorkList().get(list.getSelectedIndex());
-			WorkUpdateUI wu = new WorkUpdateUI();
-			wu.setVisible(true);
+			/*WorkUpdateUI wu = new WorkUpdateUI();
+			wu.setVisible(true);*/
 			dao1.updateWork(work);
 		}
 		
@@ -171,7 +170,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 				return;
 			textField.setText("");
 
-			Data data = new Data(Data.CHAT_MESSAGE, message);
+			
 			try {
 				output(message);
 			} catch (Exception e7) {
