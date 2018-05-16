@@ -114,8 +114,7 @@ public class WorkerUI extends JFrame implements ActionListener {
 				vo.setRoom_seq("0");
 				dao.insertWorker(vo);
 				JOptionPane.showMessageDialog(btnNewButton, "가입 완료");
-				LoginUI loginUI = new LoginUI();
-				loginUI.setVisible(true);
+				this.setVisible(false);
 
 			} else {
 				JOptionPane.showMessageDialog(btnNewButton, "같은 아이디가 있습니다");
