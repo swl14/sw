@@ -43,10 +43,17 @@ from
 	Work
 </select>
 
-<update id="numUpdate" parameterType="Work">
-update worker 
-set room_seq = #{room_seq}
-where id = #{id}
+<update id="updateWork" parameterType="String">
+update
+work
+set
+work_name=#{work_name}
+  	, start_day=#{start_day}
+  	, period=#{period}
+  	, people=#{people}
+	, detail=#{detail}
+where
+work_seq=#{work_seq}
 </update>
 
 <delete id="deleteWork" parameterType="String">

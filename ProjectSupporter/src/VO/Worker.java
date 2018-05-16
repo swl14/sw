@@ -72,8 +72,7 @@ public class Worker implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Worker [worker_seq=" + worker_seq + ", name=" + name + ", id=" + id + ", password=" + password
-				+ ", phone_number=" + phone_number + ", email=" + email + ", room_seq=" + room_seq + "]";
+		return "¿Ã∏ß : " + name + ", id : " + id	;
 	}
 	
 }

@@ -124,7 +124,6 @@ public class WorkUI extends JFrame implements ActionListener {
 			w.setProgress("0");
 			w.setRoom_seq("0");
 			dao.insertWork(w);
-			
 			//등록 메서드 추가
 			setVisible(false);
 		}
@@ -133,5 +132,4 @@ public class WorkUI extends JFrame implements ActionListener {
 			setVisible(false);
 		}
 	}
-
 }

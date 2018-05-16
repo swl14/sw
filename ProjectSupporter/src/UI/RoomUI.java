@@ -15,7 +15,6 @@ public class RoomUI extends JFrame implements ActionListener{
 	private JButton btnNewButton;
 	private RoomDAO dao;
 	
-	
 	public RoomUI() {
 		dao = new RoomDAO();
 		setSize(500, 500);

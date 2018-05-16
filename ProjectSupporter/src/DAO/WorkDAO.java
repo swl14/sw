@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import VO.Room;
 import VO.Work;
-import VO.Worker;
 
 public class WorkDAO {
 	private SqlSessionFactory factory = MybatisConfig.getSqlSessionFactory();
@@ -41,13 +39,30 @@ public class WorkDAO {
 		}
 		return result;
 	}
+	
+	public void updateWork(Work w) {
+		SqlSession session = null;
+	
+		try {
+		session = factory.openSession();
+		WorkMapper mapper = session.getMapper(WorkMapper.class);
+		mapper.updateWork(w);
+		session.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) session.close();
+		}
+	}
 
 	public void deleteWork(String work_seq) {
 		SqlSession session = null;
 		try {
 			session = factory.openSession();
 			WorkMapper mapper = session.getMapper(WorkMapper.class);
-			mapper.deleteWork(work_seq);
+			Work work = new Work();
+			System.out.println(work.getWork_seq());
+			mapper.deleteWork(work.getWork_seq());
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -12,7 +12,7 @@ import oracle.jdbc.OracleConnection.CommitOption;
 public class WorkerDAO {
 	private SqlSessionFactory factory = MybatisConfig.getSqlSessionFactory();
 
-	public void insertWorker(Worker vo) {
+	public void insertWorker(Worker vo) { // 작성
 		SqlSession session = null;
 		try {
 			session = factory.openSession();
@@ -26,7 +26,7 @@ public class WorkerDAO {
 		}
 	}
 
-	public ArrayList<Worker> WorkerList() {
+	public ArrayList<Worker> WorkerList() { // 리스트 저장
 		SqlSession session = null;
 		ArrayList<Worker> result = null;
 		try {
@@ -43,7 +43,7 @@ public class WorkerDAO {
 		return result;
 	}
 
-	public boolean WorkerCheck(String id, String password) {
+	public boolean WorkerCheck(String id, String password) { // 비밀번호 확인
 		SqlSession session = null;
 		boolean result = false;
 		String s = null;
@@ -52,6 +52,9 @@ public class WorkerDAO {
 			WorkerMapper mapper = session.getMapper(WorkerMapper.class);
 			Worker worker = new Worker();
 			worker = mapper.WorkerCheck(id);
+			if(worker==null) {
+				return false;
+			}
 			s = worker.getPassword();
 			if (s != null) {
 				if (s.equals(password)) {
@@ -69,7 +72,7 @@ public class WorkerDAO {
 		return result;
 	}
 
-	public boolean idInsert(String id) {
+	public boolean idInsert(String id) { // 
 		SqlSession session = null;
 		boolean result = false;
 		try {
@@ -87,7 +90,7 @@ public class WorkerDAO {
 		return result;
 	}
 	
-	public void numUpdate(Room room, String id) {
+	public void numUpdate(Room room, String id) { // 방 입실 시 번호 업데이트
 		SqlSession session = null;
 		try {
 			session = factory.openSession();

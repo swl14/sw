@@ -12,4 +12,6 @@ public interface WorkMapper {
 
 	public void deleteWork(String work_seq);
 
+	public void updateWork(Work w);
+
 }

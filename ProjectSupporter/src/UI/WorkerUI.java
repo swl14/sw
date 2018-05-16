@@ -11,6 +11,7 @@ import Common.Data;
 import DAO.WorkerDAO;
 import VO.Room;
 import VO.Worker;
+import java.awt.Font;
 
 public class WorkerUI extends JFrame implements ActionListener {
 	private JTextField textField;
@@ -24,8 +25,8 @@ public class WorkerUI extends JFrame implements ActionListener {
 
 	public WorkerUI() {
 		dao = new WorkerDAO();
-		setSize(500, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(400, 450);
+		setLocation(450, 300);
 		getContentPane().setLayout(null);
 		list = new JList();
 
@@ -75,9 +76,19 @@ public class WorkerUI extends JFrame implements ActionListener {
 		textField_4.setColumns(10);
 
 		btnNewButton = new JButton("\uB4F1\uB85D");
-		btnNewButton.setBounds(244, 362, 97, 23);
+		btnNewButton.setFont(new Font("±¼¸²", Font.BOLD | Font.ITALIC, 20));
+		btnNewButton.setBounds(244, 318, 97, 51);
 		btnNewButton.addActionListener(this);
 		getContentPane().add(btnNewButton);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 50, 384, 8);
+		getContentPane().add(separator);
+		
+		JLabel lblNewLabel_5 = new JLabel("\uD68C\uC6D0 \uAC00\uC785");
+		lblNewLabel_5.setFont(new Font("±¼¸²", Font.BOLD, 20));
+		lblNewLabel_5.setBounds(145, 10, 97, 30);
+		getContentPane().add(lblNewLabel_5);
 
 		setVisible(true);
 	}
@@ -101,7 +112,7 @@ public class WorkerUI extends JFrame implements ActionListener {
 				vo.setPhone_number(phone_number);
 				vo.setEmail(email);
 				vo.setRoom_seq("0");
-				connect(vo);
+				dao.insertWorker(vo);
 				JOptionPane.showMessageDialog(btnNewButton, "°¡ÀÔ ¿Ï·á");
 				LoginUI loginUI = new LoginUI();
 				loginUI.setVisible(true);
@@ -111,26 +122,5 @@ public class WorkerUI extends JFrame implements ActionListener {
 				textField_1.setText("");
 			}
 		}
-	}
-	
-	public boolean connect(Worker vo) {
-		try {
-
-			Socket s = new Socket("127.0.0.1", 8888);
-
-			OutputStream os = s.getOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(os);
-			
-			Data data = new Data(11,vo);
-			System.out.println(data.getState());
-			oos.writeUnshared(data);
-			os.close();
-			return true;
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return false;
-		}
-
 	}
 }

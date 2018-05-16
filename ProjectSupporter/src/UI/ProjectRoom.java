@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
@@ -24,6 +25,7 @@ import javax.swing.JTextField;
 
 public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private JButton btnNewButton_7;
 	private JList list;
@@ -35,13 +37,14 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	private Room room;
 	private Work work;
 	private Worker worker;
+	private ArrayList<Work> workList;
 
 	public ProjectRoom() {
 		dao1 = new WorkDAO();
 		dao2 = new WorkerDAO();
 		room = new Room();
 		setSize(780, 700);
-		setLocation(100, 50);
+		setLocation(350, 150);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
@@ -77,11 +80,12 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 
 		getContentPane().add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("\uC5C5\uBB34 \uC218\uC815");
+		btnNewButton_1 = new JButton("\uC5C5\uBB34 \uC218\uC815");
 		btnNewButton_1.setBounds(307, 163, 154, 37);
+		btnNewButton_1.addActionListener(this);
 		getContentPane().add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton("\uC5C5\uBB34 \uC0AD\uC81C");
+		btnNewButton_2 = new JButton("\uC5C5\uBB34 \uC0AD\uC81C");
 		btnNewButton_2.setBounds(307, 212, 154, 37);
 		btnNewButton_2.addActionListener(this);
 		getContentPane().add(btnNewButton_2);
@@ -122,7 +126,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 		getContentPane().add(btnNewButton_5);
 
 		JButton btnNewButton_6 = new JButton("\uD300\uC6D0 \uC815\uBCF4 \uD655\uC778");
-		btnNewButton_6.setBounds(603, 208, 145, 27);
+		btnNewButton_6.setBounds(626, 208, 122, 27);
 		getContentPane().add(btnNewButton_6);
 
 		textField = new JTextField();
@@ -140,19 +144,26 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
 		if (e.getSource() == btnNewButton) {
 			WorkUI wi = new WorkUI();
 			wi.setVisible(true);
 		}
 
+		if (e.getSource() == btnNewButton_1) {
+			Work work = new Work(); 
+			System.out.println(list.getSelectedIndex());
+			work = dao1.WorkList().get(list.getSelectedIndex());
+			WorkUpdateUI wu = new WorkUpdateUI();
+			wu.setVisible(true);
+			dao1.updateWork(work);
+		}
+		
 		if (e.getSource() == btnNewButton_2) {
-			Work work = dao1.WorkList().get(list.getSelectedIndex());
-			String work_seq=work.getWork_seq();
-			dao1.deleteWork(work_seq);
+			dao1.deleteWork(work.getWork_seq());
+			System.out.println(work.getWork_seq());
 			refreshWorkList();
 		}
-
 		
 		if (e.getSource() == btnNewButton_7) {
 			String message = textField.getText();
@@ -175,7 +186,6 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 
 	public void refreshWorkList() {
 		list.setListData(dao1.WorkList().toArray());
-
 	}
 
 	public void refreshWorkerList() {
@@ -185,10 +195,9 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while (true) {
+/*		while (true) {
 			refreshWorkList();
 			refreshWorkerList();
-		}
+		}*/
 	}
-	
 }

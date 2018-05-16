@@ -5,11 +5,11 @@ import javax.swing.*;
 import DAO.RoomDAO;
 import DAO.WorkerDAO;
 import VO.Room;
-import VO.Worker;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.Font;
 
 public class SelectUI extends JFrame implements ActionListener {
 	private JPanel panel;
@@ -27,7 +27,8 @@ public class SelectUI extends JFrame implements ActionListener {
 
 	public SelectUI(String id) {
 		this.id = id;
-		setSize(750, 500);
+		setSize(570, 500);
+		setLocation(350, 150);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
@@ -56,12 +57,14 @@ public class SelectUI extends JFrame implements ActionListener {
 		scrollPane.setViewportView(list);
 
 		btnNewButton = new JButton("\uC785\uC7A5");
-		btnNewButton.setBounds(417, 350, 129, 85);
+		btnNewButton.setFont(new Font("±¼¸²", Font.BOLD | Font.ITALIC, 20));
+		btnNewButton.setBounds(325, 350, 130, 85);
 		btnNewButton.addActionListener(this);
 		getContentPane().add(btnNewButton);
 
 		btnNewButton_1 = new JButton("\uBC29 \uB9CC\uB4E4\uAE30");
-		btnNewButton_1.setBounds(581, 350, 129, 85);
+		btnNewButton_1.setFont(new Font("±¼¸²", Font.BOLD | Font.ITALIC, 20));
+		btnNewButton_1.setBounds(90, 350, 130, 85);
 		btnNewButton_1.addActionListener(this);
 		getContentPane().add(btnNewButton_1);
 
