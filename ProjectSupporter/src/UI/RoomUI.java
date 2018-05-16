@@ -18,7 +18,6 @@ public class RoomUI extends JFrame implements ActionListener{
 	public RoomUI() {
 		dao = new RoomDAO();
 		setSize(500, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("\uBC29 \uC774\uB984");
@@ -83,6 +82,7 @@ public class RoomUI extends JFrame implements ActionListener{
 			dao.insertRoom(vo);
 			ProjectRoom pr = new ProjectRoom();
 			pr.setVisible(true);
+			this.setVisible(false);
 		}
 	}
 }
