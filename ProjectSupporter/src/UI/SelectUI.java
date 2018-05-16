@@ -99,5 +99,17 @@ public class SelectUI extends JFrame implements ActionListener {
 	public void refreshList() {
 		list.setListData(dao.RoomList().toArray());
 	}
-
+	
+	public void roomTable() {
+		String columnNames[] = {"방 번호", "프로젝트 이름", "프로젝트 기간"};
+		ArrayList<Room> roomList=dao.RoomList();
+		Object rowData [][] = new Object[roomList.size()][3];
+		for(int i=0; i<roomList.size(); i++) {
+			rowData[i][0]=roomList.get(i).getRoom_seq();
+			rowData[i][1]=roomList.get(i).getRoom_seq();
+			rowData[i][2]=roomList.get(i).getRoom_seq();
+		}
+		
+		
+	}
 }
