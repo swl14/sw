@@ -114,10 +114,8 @@ public class WorkerDAO {
 		Worker worker = new Worker();
 		try {
 			session = factory.openSession();
-			WorkerMapper mapper = session.getMapper(WorkerMapper.class);
-			
-			worker = mapper.idInsert(id);
-		
+			WorkerMapper mapper = session.getMapper(WorkerMapper.class);			
+			worker = mapper.idInsert(id);	
 			session.commit();
 			
 			return worker;

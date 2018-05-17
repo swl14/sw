@@ -42,7 +42,6 @@ public class WorkDAO {
 	
 	public void updateWork(Work w) {
 		SqlSession session = null;
-	
 		try {
 		session = factory.openSession();
 		WorkMapper mapper = session.getMapper(WorkMapper.class);
@@ -65,6 +64,21 @@ public class WorkDAO {
 			mapper.deleteWork(work.getWork_seq());
 			session.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	public void detailWork(String work_seq) {
+		SqlSession session = null;
+		try {
+		session = factory.openSession();
+		WorkMapper mapper = session.getMapper(WorkMapper.class);
+		Work work = new Work();
+		mapper.detailWork();
+		session.commit();
+		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			session.close();

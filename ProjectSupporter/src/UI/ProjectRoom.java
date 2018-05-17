@@ -28,6 +28,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	private JButton btnNewButton_4;
 	private JButton btnNewButton_7;
 	JTextArea outputText;
 	private JTextField textField;
@@ -97,7 +98,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 		btnNewButton_3.setBounds(329, 614, 122, 27);
 		getContentPane().add(btnNewButton_3);
 
-		JButton btnNewButton_4 = new JButton("\uC5C5\uBB34 \uC0C1\uC138\uC815\uBCF4 \uD655\uC778");
+		btnNewButton_4 = new JButton("\uC5C5\uBB34 \uC0C1\uC138\uC815\uBCF4 \uD655\uC778");
 		btnNewButton_4.setBounds(307, 261, 154, 43);
 		getContentPane().add(btnNewButton_4);
 
@@ -148,11 +149,15 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 			work = workList.get(jtable.getSelectedRow());
 			WorkUpdateUI workupdate = new WorkUpdateUI(work);
 			workupdate.setVisible(true);
-			
 		}
 		
 		if (e.getSource() == btnNewButton_2) {
 			dao1.deleteWork(work.getWork_seq());
+			System.out.println(work.getWork_seq());
+		}
+		
+		if (e.getSource() == btnNewButton_4) {
+			dao1.detailWork(work.getWork_seq());
 			System.out.println(work.getWork_seq());
 		}
 		
@@ -200,7 +205,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 			rowData[i][1] = workerList.get(i).getId();
 		}
 		DefaultTableModel dtm = new DefaultTableModel(rowData, columnNames);
-		JTable jtable = new JTable(dtm);
+		jtable = new JTable(dtm);
 		
 		scrollPane_1 = new JScrollPane(jtable);
 		scrollPane_1.setBounds(488, 56, 260, 145);

@@ -14,4 +14,6 @@ public interface WorkMapper {
 
 	public void updateWork(Work w);
 
+	public void detailWork();
+
 }

@@ -9,11 +9,13 @@ import VO.Room;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.Font;
 import java.awt.Image;
 
-public class SelectUI extends JFrame implements ActionListener {
+public class SelectUI extends JFrame implements ActionListener, MouseListener {
 	private JScrollPane scrollPane;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
@@ -25,6 +27,7 @@ public class SelectUI extends JFrame implements ActionListener {
 	private JTable jtable;
 	private String id;
 	private DefaultTableModel dtm;
+	private Object rowData[][];
 
 	public SelectUI(String id) {
 		this.id = id;
@@ -58,14 +61,15 @@ public class SelectUI extends JFrame implements ActionListener {
 	public void roomTable() {
 		String columnNames[] = { "방 번호", "프로젝트 이름", "프로젝트 기간" };
 		roomList = dao.RoomList();
-		Object rowData[][] = new Object[roomList.size()][3];
+		rowData = new Object[roomList.size()][3];
 		for (int i = 0; i < roomList.size(); i++) {
 			rowData[i][0] = roomList.get(i).getRoom_seq();
 			rowData[i][1] = roomList.get(i).getRoom_name();
 			rowData[i][2] = roomList.get(i).getFirst_day();
 		}
 		dtm = new DefaultTableModel(rowData, columnNames);
-		JTable jtable = new JTable(dtm);
+		jtable = new JTable(dtm);
+		jtable.addMouseListener(this);
 
 		scrollPane = new JScrollPane(jtable);
 		scrollPane.setBounds(12, 65, 530, 311);
@@ -80,13 +84,13 @@ public class SelectUI extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		roomList = new ArrayList<Room>();
 
-		int row = dtm.getRowCount();
+		int row = Integer.parseInt(roomList.get(jtable.getSelectedRow()).getRoom_seq());
 
 		if (e.getSource() == btnNewButton) {
 			String check = JOptionPane.showInputDialog("패스워드를 입력하세요");
-			if (dao.RoomCheck(String.valueOf(row), check)) {
+			System.out.println(roomList.get(jtable.getSelectedRow()).getRoom_seq());
+			if (dao.RoomCheck(roomList.get(jtable.getSelectedRow()).getRoom_seq(), check)) {
 				setVisible(false);
 			} else {
 				JOptionPane.showMessageDialog(btnNewButton, "입장에 실패했습니다");
@@ -104,5 +108,35 @@ public class SelectUI extends JFrame implements ActionListener {
 		if (e.getSource() == btnNewButton_2) {
 			
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

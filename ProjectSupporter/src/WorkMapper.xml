@@ -57,9 +57,26 @@ work_seq=#{work_seq}
 </update>
 
 <delete id="deleteWork" parameterType="String">
-delete work
+delete 
+work
 where 
 work_seq=#{work_seq}
 </delete>
+
+<select id="detailWork" parameterType="String">
+select
+  	work_seq
+  	, work_name
+  	, start_day
+  	, period
+  	, people
+	, detail
+	, progress
+	, room_seq
+from
+work
+where 
+work_seq=#{work_seq}
+</select>
 
 </mapper>
