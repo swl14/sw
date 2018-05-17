@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import DAO.WorkerDAO;
+import VO.Worker;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	private WorkerDAO dao;
 	private JSeparator separator;
 	private JLabel lblNewLabel_2;
+	private Worker worker;
 
 	public LoginUI() {
 		setSize(390, 280);
@@ -80,20 +82,26 @@ public class LoginUI extends JFrame implements ActionListener {
 			String name = textField.getText();
 			String password = passwordField.getText();
 			dao = new WorkerDAO();
-			String seq = dao.workerFinder(name).getRoom_seq();
-			if(dao.WorkerCheck(name, password)) {
-				JOptionPane.showMessageDialog(btnNewButton, "로그인 성공");
-				
-				if(seq.equals("0")) {
-				SelectUI selectUI = new SelectUI(name);
-				selectUI.setVisible(true);
+			worker = dao.workerFinder(name);
+			if(worker != null) {
+				String seq = worker.getRoom_seq();
+				if(dao.WorkerCheck(name, password)) {
+					JOptionPane.showMessageDialog(btnNewButton, "로그인 성공");
+					
+					if(seq.equals("0")) {
+					SelectUI selectUI = new SelectUI(name);
+					selectUI.setVisible(true);
+					}else {
+						ProjectRoom projectroom = new ProjectRoom(Integer.parseInt(seq));
+					}
+					setVisible(false);
 				}else {
-					ProjectRoom projectroom = new ProjectRoom(Integer.parseInt(seq));
-				}
-				setVisible(false);
+					JOptionPane.showMessageDialog(btnNewButton, "로그인 실패");
+				}			
 			}else {
-				JOptionPane.showMessageDialog(btnNewButton, "로그인 실패");
-			}			
+				JOptionPane.showMessageDialog(btnNewButton, "존재 하지 않는 ID");
+			}
+			
 		} 
 		
 		if (e.getSource() == btnNewButton_1) {

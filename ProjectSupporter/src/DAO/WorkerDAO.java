@@ -117,7 +117,7 @@ public class WorkerDAO {
 			WorkerMapper mapper = session.getMapper(WorkerMapper.class);
 			
 			worker = mapper.idInsert(id);
-
+		
 			session.commit();
 			
 			return worker;

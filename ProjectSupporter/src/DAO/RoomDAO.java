@@ -71,7 +71,7 @@ public class RoomDAO {
 			RoomMapper mapper = session.getMapper(RoomMapper.class);
 			Room r = new Room();
 			r = mapper.RoomCheck(seq);
-			if(r ==null) {
+			if(r == null) {
 				return false;
 			}
 			s = r.getRoom_password();

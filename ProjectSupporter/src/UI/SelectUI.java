@@ -11,11 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Font;
+import java.awt.Image;
 
 public class SelectUI extends JFrame implements ActionListener {
 	private JScrollPane scrollPane;
-	private JButton btnNewButton_1;
 	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
 	private Room room;
 	private RoomDAO dao = new RoomDAO();
 	private WorkerDAO wdao = new WorkerDAO();
@@ -26,22 +28,27 @@ public class SelectUI extends JFrame implements ActionListener {
 
 	public SelectUI(String id) {
 		this.id = id;
-		setSize(570, 500);
+		setSize(570, 530);
 		setLocation(350, 150);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		btnNewButton = new JButton("\uC785\uC7A5");
 		btnNewButton.setFont(new Font("±¼¸²", Font.BOLD | Font.ITALIC, 20));
-		btnNewButton.setBounds(298, 350, 130, 85);
+		btnNewButton.setBounds(323, 388, 130, 85);
 		btnNewButton.addActionListener(this);
 		getContentPane().add(btnNewButton);
 
 		btnNewButton_1 = new JButton("\uBC29 \uB9CC\uB4E4\uAE30");
 		btnNewButton_1.setFont(new Font("±¼¸²", Font.BOLD | Font.ITALIC, 20));
-		btnNewButton_1.setBounds(95, 350, 130, 85);
+		btnNewButton_1.setBounds(77, 388, 130, 85);
 		btnNewButton_1.addActionListener(this);
 		getContentPane().add(btnNewButton_1);
+		
+		btnNewButton_2 = new JButton(new ImageIcon("C:\\Users\\user\\git\\sw\\ProjectSupporter\\refresh.png"));
+		btnNewButton_2.setBounds(492, 10, 50, 50);
+		btnNewButton_2.addActionListener(this);
+		getContentPane().add(btnNewButton_2);
 
 		roomTable();
 		setVisible(true);
@@ -59,21 +66,22 @@ public class SelectUI extends JFrame implements ActionListener {
 		}
 		dtm = new DefaultTableModel(rowData, columnNames);
 		JTable jtable = new JTable(dtm);
-		
+
 		scrollPane = new JScrollPane(jtable);
-		scrollPane.setBounds(12, 10, 530, 311);
+		scrollPane.setBounds(12, 65, 530, 311);
 		getContentPane().add(scrollPane);
 		
-		/*JButton btnNewButton_2 = new JButton(new ImageIcon);
-		btnNewButton_2.setBounds(492, 394, 50, 41);
-		getContentPane().add(btnNewButton_2);*/
+		JLabel lblNewLabel = new JLabel("Room Select");
+		lblNewLabel.setFont(new Font("±¼¸²", Font.BOLD, 20));
+		lblNewLabel.setBounds(183, 10, 130, 50);
+		getContentPane().add(lblNewLabel);
+
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		roomList = new ArrayList<Room>();
-		
-			
+
 		int row = dtm.getRowCount();
 
 		if (e.getSource() == btnNewButton) {
@@ -92,6 +100,9 @@ public class SelectUI extends JFrame implements ActionListener {
 		if (e.getSource() == btnNewButton_1) {
 			RoomUI roomUI = new RoomUI(id);
 			roomUI.setVisible(true);
+		}
+		if (e.getSource() == btnNewButton_2) {
+			
 		}
 	}
 }
