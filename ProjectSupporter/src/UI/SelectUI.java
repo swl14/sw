@@ -63,6 +63,10 @@ public class SelectUI extends JFrame implements ActionListener {
 		scrollPane = new JScrollPane(jtable);
 		scrollPane.setBounds(12, 10, 530, 311);
 		getContentPane().add(scrollPane);
+		
+		/*JButton btnNewButton_2 = new JButton(new ImageIcon);
+		btnNewButton_2.setBounds(492, 394, 50, 41);
+		getContentPane().add(btnNewButton_2);*/
 	}
 	
 	@Override
