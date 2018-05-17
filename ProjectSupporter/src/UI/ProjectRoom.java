@@ -29,8 +29,6 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private JButton btnNewButton_7;
-	private JList list;
-	private JList list_2;
 	JTextArea outputText;
 	private JTextField textField;
 	private WorkDAO dao1;
@@ -43,6 +41,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane_1;
 	private int room_seq;
+	private JTable jtable;
 	
 	public ProjectRoom(int room_seq) {
 		this.room_seq = room_seq;
@@ -145,18 +144,16 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 		}
 
 		if (e.getSource() == btnNewButton_1) {
-			Work work = new Work(); 
-			System.out.println(list.getSelectedIndex());
-			work = dao1.WorkList().get(list.getSelectedIndex());
-			/*WorkUpdateUI wu = new WorkUpdateUI();
-			wu.setVisible(true);*/
-			dao1.updateWork(work);
+			Work work = new Work();
+			work = workList.get(jtable.getSelectedRow());
+			WorkUpdateUI workupdate = new WorkUpdateUI(work);
+			workupdate.setVisible(true);
+			
 		}
 		
 		if (e.getSource() == btnNewButton_2) {
 			dao1.deleteWork(work.getWork_seq());
 			System.out.println(work.getWork_seq());
-			refreshWorkList();
 		}
 		
 		if (e.getSource() == btnNewButton_7) {
@@ -178,14 +175,6 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 		outputText.append(msg + "\n");
 	}
 
-	public void refreshWorkList() {
-		list.setListData(dao1.WorkList().toArray());
-	}
-
-	public void refreshWorkerList() {
-		list_2.setListData(dao2.WorkerList(room_seq).toArray());
-	}
-	
 	public void workTable() {
 		String columnNames[] = {"업무명", "업무 진행도"};
 		workList = dao1.WorkList();
@@ -195,7 +184,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 			rowData[i][1] = workList.get(i).getProgress();
 		}
 		DefaultTableModel dtm = new DefaultTableModel(rowData, columnNames);
-		JTable jtable = new JTable(dtm);
+		jtable = new JTable(dtm);
 		
 		scrollPane = new JScrollPane(jtable);
 		scrollPane.setBounds(20, 114, 282, 492);

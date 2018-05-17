@@ -22,8 +22,10 @@ public class WorkUpdateUI extends JFrame implements ActionListener{
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private WorkDAO dao;
+	private Work w;
 	
-	public WorkUpdateUI() {
+	public WorkUpdateUI(Work work) {
+	w = work;
 	dao = new WorkDAO();
 	setSize(320,400);
 	setLocation(1000, 100);
@@ -63,21 +65,25 @@ public class WorkUpdateUI extends JFrame implements ActionListener{
 	textField.setBounds(138, 57, 149, 24);
 	getContentPane().add(textField);
 	textField.setColumns(10);
+	textField.setText(w.getWork_name());
 	
 	textField_1 = new JTextField();
 	textField_1.setBounds(137, 92, 149, 24);
 	getContentPane().add(textField_1);
 	textField_1.setColumns(10);
+	textField_1.setText(w.getStart_day());
 	
 	textField_2 = new JTextField();
 	textField_2.setBounds(137, 127, 149, 24);
 	getContentPane().add(textField_2);
 	textField_2.setColumns(10);
+	textField_2.setText(w.getPeriod());
 	
 	textField_3 = new JTextField();
 	textField_3.setBounds(137, 162, 149, 24);
 	getContentPane().add(textField_3);
 	textField_3.setColumns(10);
+	textField_3.setText(w.getPeople());
 	
 	JLabel lblNewLabel_3 = new JLabel("\uC5C5\uBB34 \uC0C1\uC138\uC815\uBCF4 : ");
 	lblNewLabel_3.setBounds(14, 200, 104, 18);
@@ -87,7 +93,7 @@ public class WorkUpdateUI extends JFrame implements ActionListener{
 	textField_4.setBounds(137, 198, 150, 87);
 	getContentPane().add(textField_4);
 	textField_4.setColumns(10);
-	
+	textField_4.setText(w.getDetail());
 	JSeparator separator_2 = new JSeparator();
 	separator_2.setBounds(0, 301, 302, 12);
 	getContentPane().add(separator_2);
@@ -115,7 +121,6 @@ public class WorkUpdateUI extends JFrame implements ActionListener{
 			String people = textField_3.getText();
 			String detail = textField_4.getText();
 			
-			Work w = new Work();
 			w.setWork_name(work_name);
 			w.setStart_day(start_day);
 			w.setPeriod(period);
