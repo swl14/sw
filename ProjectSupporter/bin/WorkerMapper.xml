@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원 정보 처리 SQL -->
+<mapper namespace="DAO.WorkerMapper">
+
+<insert id="insertWorker" parameterType="Worker">
+insert into Worker
+(
+worker_seq
+, name
+, id
+, password
+, phone_number
+, email
+, room_seq
+) values
+(
+worker_seq.nextval
+, #{name}
+, #{id}
+, #{password}
+, #{phone_number}
+, #{email}
+, #{room_seq}
+)
+</insert>
+
+<select id="WorkerList" parameterType="Worker" resultType="Worker">
+select
+worker_seq
+, name
+, id
+, password
+, phone_number
+, email
+, room_seq
+from 
+	Worker
+where room_seq =#{room_seq}
+</select>
+
+<select id="WorkerCheck" parameterType="Worker" resultType="Worker">
+select
+password
+from 
+Worker
+where
+id=#{id}	
+</select>
+
+<select id="idInsert" parameterType="Worker" resultType="Worker">
+select
+id, room_seq
+from
+Worker
+where id = #{id}	
+</select>
+
+<update id="numUpdate" parameterType="Worker">
+update worker 
+set room_seq = #{room_seq}
+where id = #{id}
+</update>
+
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원 정보 처리 SQL -->
+<mapper namespace="DAO.WorkMapper">
+
+<insert id="insertWork" parameterType="Work">
+insert into Work(
+  	work_seq
+  	, work_name
+  	, start_day
+  	, period
+  	, people
+	, detail
+	, progress
+	, room_seq
+) values
+(
+work_seq.nextval
+, #{work_name}
+, #{start_day}
+, #{period}
+, #{people}
+, #{detail}
+, #{progress}
+, #{room_seq}
+)
+</insert>
+
+<select id="WorkList" resultType="Work">
+select
+  	work_seq
+  	, work_name
+  	, start_day
+  	, period
+  	, people
+	, detail
+	, progress
+	, room_seq
+from 
+	Work
+</select>
+
+<update id="updateWork" parameterType="String">
+update
+work
+set
+work_name=#{work_name}
+  	, start_day=#{start_day}
+  	, period=#{period}
+  	, people=#{people}
+	, detail=#{detail}
+where
+work_seq=#{work_seq}
+</update>
+
+<delete id="deleteWork" parameterType="String">
+delete work
+where 
+work_seq=#{work_seq}
+</delete>
+
+</mapper>

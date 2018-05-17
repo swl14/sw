@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원 정보 처리 SQL -->
+<mapper namespace="DAO.JoinWorkMapper">
+
+<insert id="insertJoinWork" parameterType="JoinWork">
+insert into JoinWork(
+  	joinwork_seq
+  	, worker_num
+  	, room_num
+) values
+(
+joinwork_seq.nextval
+, #{worker_num}
+, #{room_num}
+)
+</insert>
+
+<select id="JoinWorkList" resultType="JoinWork">
+select
+  	joinwork_seq
+  	, worker_num
+  	, room_num
+from 
+	JoinWork
+</select>
+
+</mapper>
