@@ -93,7 +93,11 @@ public class Work {
 
 	@Override
 	public String toString() {
-		return "업무 명 : " + work_name + ", 업무 진행도 : " + progress ;
+		return "Work [work_seq=" + work_seq + ", work_name=" + work_name + ", start_day=" + start_day + ", period="
+				+ period + ", people=" + people + ", detail=" + detail + ", progress=" + progress + ", room_seq="
+				+ room_seq + "]";
 	}
+
+	
 	
 }
