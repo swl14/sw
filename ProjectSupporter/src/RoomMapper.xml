@@ -15,6 +15,7 @@ room_seq
 , last_day
 , room_password
 , leader
+, room_creater
 ) values
 (
 room_seq.nextval
@@ -23,6 +24,7 @@ room_seq.nextval
 , #{last_day}
 , #{room_password}
 , #{leader}
+, #{room_creater}
 )
 </insert>
 
@@ -34,8 +36,19 @@ room_seq
 , last_day
 , room_password
 , leader
+, room_creater
 from 
 	Room
+</select>
+
+<select id="Room_seqFinder" parameterType="Room" resultType="Room">
+select
+room_seq
+from 
+room
+where
+room_creater
+=#{room_creater}
 </select>
 
 <select id="RoomCheck" parameterType="Room" resultType="Room">
@@ -47,7 +60,5 @@ where
 room_seq
 =#{room_seq}
 </select>
-
-
 
 </mapper>

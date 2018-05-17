@@ -25,7 +25,26 @@ public class RoomDAO {
 			session.close();
 		}
 	}
+	public int Room_seqFinder(String creater_id) {
+		SqlSession session = null;
+		int result = 0;
+		Room room;
+		try {
+			session = factory.openSession();
+			RoomMapper mapper = session.getMapper(RoomMapper.class);
+			room = mapper.Room_seqFinder(creater_id);
+			result = Integer.parseInt(room.getRoom_seq());
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
+		return result;
+	}
+	
+	
 	public ArrayList<Room> RoomList() {
 		SqlSession session = null;
 		ArrayList<Room> result = null;
@@ -52,6 +71,9 @@ public class RoomDAO {
 			RoomMapper mapper = session.getMapper(RoomMapper.class);
 			Room r = new Room();
 			r = mapper.RoomCheck(seq);
+			if(r ==null) {
+				return false;
+			}
 			s = r.getRoom_password();
 			if (s != null) {
 				if (s.equals(check)) {

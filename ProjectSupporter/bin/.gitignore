@@ -1,13 +1,3 @@
-/AllSql.sql
-/Common/
-/DAO/
-/JoinWorkMapper.xml
-/Main/
-/RoomMapper.xml
-/Server/
 /UI/
+/DAO/
 /VO/
-/WorkMapper.xml
-/WorkerMapper.xml
-/db.properties
-/mybatis-config.xml

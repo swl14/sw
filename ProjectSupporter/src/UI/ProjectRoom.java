@@ -8,8 +8,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import DAO.WorkDAO;
 import DAO.WorkerDAO;
@@ -37,8 +39,13 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	private Work work;
 	private Worker worker;
 	private ArrayList<Work> workList;
-
-	public ProjectRoom() {
+	private ArrayList<Worker> workerList;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
+	private int room_seq;
+	
+	public ProjectRoom(int room_seq) {
+		this.room_seq = room_seq;
 		dao1 = new WorkDAO();
 		dao2 = new WorkerDAO();
 		room = new Room();
@@ -65,13 +72,7 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 		label.setBounds(121, 79, 81, 18);
 		getContentPane().add(label);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 114, 282, 492);
-		getContentPane().add(scrollPane);
-
-		list = new JList();
-		scrollPane.setViewportView(list);
-		refreshWorkList();
+		// refreshWorkList();
 
 		btnNewButton = new JButton("\uC0C8\uB85C\uC6B4 \uC5C5\uBB34 \uB4F1\uB85D");
 		btnNewButton.setBounds(307, 114, 157, 37);
@@ -100,14 +101,6 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 		JButton btnNewButton_4 = new JButton("\uC5C5\uBB34 \uC0C1\uC138\uC815\uBCF4 \uD655\uC778");
 		btnNewButton_4.setBounds(307, 261, 154, 43);
 		getContentPane().add(btnNewButton_4);
-
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(488, 56, 260, 145);
-		getContentPane().add(scrollPane_1);
-
-		list_2 = new JList();
-		scrollPane_1.setViewportView(list_2);
-		refreshWorkerList();
 
 		outputText = new JTextArea();
 		outputText.setLineWrap(true);
@@ -138,6 +131,8 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 		btnNewButton_7.addActionListener(this);
 		getContentPane().add(btnNewButton_7);
 
+		workTable();
+		workerTable();
 		setVisible(true);
 	}
 
@@ -188,7 +183,39 @@ public class ProjectRoom extends JFrame implements ActionListener, Runnable {
 	}
 
 	public void refreshWorkerList() {
-		list_2.setListData(dao2.WorkerList().toArray());
+		list_2.setListData(dao2.WorkerList(room_seq).toArray());
+	}
+	
+	public void workTable() {
+		String columnNames[] = {"업무명", "업무 진행도"};
+		workList = dao1.WorkList();
+		Object rowData[][] = new Object[workList.size()][2];
+		for(int i = 0; i < workList.size(); i++) {
+			rowData[i][0] = workList.get(i).getWork_name();
+			rowData[i][1] = workList.get(i).getProgress();
+		}
+		DefaultTableModel dtm = new DefaultTableModel(rowData, columnNames);
+		JTable jtable = new JTable(dtm);
+		
+		scrollPane = new JScrollPane(jtable);
+		scrollPane.setBounds(20, 114, 282, 492);
+		getContentPane().add(scrollPane);
+	}
+	
+	public void workerTable() {
+		String columnNames[] = {"이름", "ID"};
+		workerList = dao2.WorkerList(room_seq);
+		Object rowData[][] = new Object[workList.size()][2];
+		for(int i = 0; i < workerList.size(); i++) {
+			rowData[i][0] = workerList.get(i).getName();
+			rowData[i][1] = workerList.get(i).getId();
+		}
+		DefaultTableModel dtm = new DefaultTableModel(rowData, columnNames);
+		JTable jtable = new JTable(dtm);
+		
+		scrollPane_1 = new JScrollPane(jtable);
+		scrollPane_1.setBounds(488, 56, 260, 145);
+		getContentPane().add(scrollPane_1);
 	}
 
 	@Override

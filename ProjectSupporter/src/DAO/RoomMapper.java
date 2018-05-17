@@ -13,4 +13,6 @@ public interface RoomMapper {
 
 	public Room RoomCheck(String room_seq);
 
+	public Room Room_seqFinder(String room_creater);
+
 }

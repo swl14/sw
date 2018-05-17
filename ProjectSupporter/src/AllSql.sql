@@ -18,6 +18,7 @@ room_seq varchar2(300) primary key
 , last_day varchar2(300)
 , room_password varchar2(300)
 , leader varchar2(300)
+, room_creater varchar2(30)
 )
 
 create sequence room_seq

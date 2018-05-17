@@ -26,13 +26,14 @@ public class WorkerDAO {
 		}
 	}
 
-	public ArrayList<Worker> WorkerList() { // 리스트 저장
+	public ArrayList<Worker> WorkerList(int room_seq) { // 리스트 저장
 		SqlSession session = null;
 		ArrayList<Worker> result = null;
+		String input = String.valueOf(room_seq);
 		try {
 			session = factory.openSession();
 			WorkerMapper mapper = session.getMapper(WorkerMapper.class);
-			result = mapper.WorkerList();
+			result = mapper.WorkerList(input);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,14 +91,15 @@ public class WorkerDAO {
 		return result;
 	}
 	
-	public void numUpdate(Room room, String id) { // 방 입실 시 번호 업데이트
+	public void numUpdate(int row, String id) { // 방 입실 시 번호 업데이트
 		SqlSession session = null;
+		String number = String.valueOf(row);
 		try {
 			session = factory.openSession();
 			WorkerMapper mapper = session.getMapper(WorkerMapper.class);
 			Worker worker = new Worker();
 			worker = mapper.idInsert(id);
-			worker.setRoom_seq(room.getRoom_seq());
+			worker.setRoom_seq(number);
 			mapper.numUpdate(worker);
 			session.commit();
 		} catch (Exception e) {
@@ -105,5 +107,26 @@ public class WorkerDAO {
 		} finally {
 			session.close();
 		}
+	}
+	
+	public Worker workerFinder(String id) {
+		SqlSession session = null;
+		Worker worker = new Worker();
+		try {
+			session = factory.openSession();
+			WorkerMapper mapper = session.getMapper(WorkerMapper.class);
+			
+			worker = mapper.idInsert(id);
+
+			session.commit();
+			
+			return worker;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return worker;
 	}
 }

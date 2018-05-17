@@ -80,10 +80,16 @@ public class LoginUI extends JFrame implements ActionListener {
 			String name = textField.getText();
 			String password = passwordField.getText();
 			dao = new WorkerDAO();
+			String seq = dao.workerFinder(name).getRoom_seq();
 			if(dao.WorkerCheck(name, password)) {
 				JOptionPane.showMessageDialog(btnNewButton, "로그인 성공");
+				
+				if(seq.equals("0")) {
 				SelectUI selectUI = new SelectUI(name);
 				selectUI.setVisible(true);
+				}else {
+					ProjectRoom projectroom = new ProjectRoom(Integer.parseInt(seq));
+				}
 				setVisible(false);
 			}else {
 				JOptionPane.showMessageDialog(btnNewButton, "로그인 실패");

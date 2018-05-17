@@ -28,7 +28,7 @@ worker_seq.nextval
 )
 </insert>
 
-<select id="WorkerList" resultType="Worker">
+<select id="WorkerList" parameterType="Worker" resultType="Worker">
 select
 worker_seq
 , name
@@ -39,6 +39,7 @@ worker_seq
 , room_seq
 from 
 	Worker
+where room_seq =#{room_seq}
 </select>
 
 <select id="WorkerCheck" parameterType="Worker" resultType="Worker">
@@ -52,7 +53,7 @@ id=#{id}
 
 <select id="idInsert" parameterType="Worker" resultType="Worker">
 select
-id
+id, room_seq
 from
 Worker
 where id = #{id}	

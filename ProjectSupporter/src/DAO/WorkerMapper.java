@@ -8,7 +8,7 @@ public interface WorkerMapper {
 
 	public void insertWorker(Worker vo);
 
-	public ArrayList<Worker> WorkerList();
+	public ArrayList<Worker> WorkerList(String room_seq);
 
 	public Worker WorkerCheck(String id);
 

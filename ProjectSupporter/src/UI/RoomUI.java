@@ -14,8 +14,11 @@ public class RoomUI extends JFrame implements ActionListener{
 	private JTextField textField_3;
 	private JButton btnNewButton;
 	private RoomDAO dao;
+	private String id;
+	private int room_seq;
 	
-	public RoomUI() {
+	public RoomUI(String id) {
+		this.id = id;
 		dao = new RoomDAO();
 		setSize(500, 500);
 		getContentPane().setLayout(null);
@@ -79,8 +82,12 @@ public class RoomUI extends JFrame implements ActionListener{
 			vo.setLast_day(last_day);
 			vo.setRoom_password(room_password);
 			vo.setLeader("notyet");
+			vo.setRoom_creater(id);
 			dao.insertRoom(vo);
-			ProjectRoom pr = new ProjectRoom();
+			room_seq = dao.Room_seqFinder(id);
+			
+			System.out.println(room_seq);
+			ProjectRoom pr = new ProjectRoom(room_seq);
 			pr.setVisible(true);
 			this.setVisible(false);
 		}

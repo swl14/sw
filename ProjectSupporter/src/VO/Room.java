@@ -7,6 +7,7 @@ public class Room {
 	private String last_day;
 	private String room_password;
 	private String leader;
+	private String room_creater;
 	
 	public Room(String room_seq, String room_name, String first_day, String last_day, String room_password,
 			String leader) {
@@ -21,6 +22,14 @@ public class Room {
 
 	public Room() {
 		super();
+	}
+
+	public String getRoom_creater() {
+		return room_creater;
+	}
+
+	public void setRoom_creater(String room_creater) {
+		this.room_creater = room_creater;
 	}
 
 	public String getRoom_seq() {
@@ -70,12 +79,5 @@ public class Room {
 	public void setLeader(String leader) {
 		this.leader = leader;
 	}
-
-	@Override
-	public String toString() {
-		return "\t" + room_seq+"      " + room_name + "\t" + first_day + "\t ~ \t"
-				+ last_day + "\t\t";
-	}
-
 	
 }
