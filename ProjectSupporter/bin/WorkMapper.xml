@@ -29,7 +29,7 @@ work_seq.nextval
 )
 </insert>
 
-<select id="WorkList" resultType="Work">
+<select id="WorkList" parameterType="Work"  resultType="Work">
 select
   	work_seq
   	, work_name
@@ -41,6 +41,7 @@ select
 	, room_seq
 from 
 	Work
+where room_seq = #{room_seq}
 </select>
 
 <update id="updateWork" parameterType="String">
@@ -63,20 +64,11 @@ where
 work_seq=#{work_seq}
 </delete>
 
-<select id="detailWork" parameterType="String">
-select
-  	work_seq
-  	, work_name
-  	, start_day
-  	, period
-  	, people
-	, detail
-	, progress
-	, room_seq
-from
+<delete id="finishWork" parameterType="String">
+delete 
 work
 where 
-work_seq=#{work_seq}
-</select>
+room_seq=#{room_seq}
+</delete>
 
 </mapper>

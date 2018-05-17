@@ -65,7 +65,7 @@ public class SelectUI extends JFrame implements ActionListener, MouseListener {
 		for (int i = 0; i < roomList.size(); i++) {
 			rowData[i][0] = roomList.get(i).getRoom_seq();
 			rowData[i][1] = roomList.get(i).getRoom_name();
-			rowData[i][2] = roomList.get(i).getFirst_day();
+			rowData[i][2] = (String)(roomList.get(i).getFirst_day()+" ~ "+roomList.get(i).getLast_day());
 		}
 		dtm = new DefaultTableModel(rowData, columnNames);
 		jtable = new JTable(dtm);
@@ -84,12 +84,10 @@ public class SelectUI extends JFrame implements ActionListener, MouseListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		int row = Integer.parseInt(roomList.get(jtable.getSelectedRow()).getRoom_seq());
 
 		if (e.getSource() == btnNewButton) {
 			String check = JOptionPane.showInputDialog("패스워드를 입력하세요");
-			System.out.println(roomList.get(jtable.getSelectedRow()).getRoom_seq());
 			if (dao.RoomCheck(roomList.get(jtable.getSelectedRow()).getRoom_seq(), check)) {
 				setVisible(false);
 			} else {
@@ -97,7 +95,7 @@ public class SelectUI extends JFrame implements ActionListener, MouseListener {
 				return;
 			}
 			wdao.numUpdate(row, id);
-			ProjectRoom projectRoom = new ProjectRoom(row);
+			ProjectRoom projectRoom = new ProjectRoom(row,id);
 			projectRoom.setVisible(true);
 			this.setVisible(false);
 		}

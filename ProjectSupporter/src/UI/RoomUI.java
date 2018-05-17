@@ -87,7 +87,7 @@ public class RoomUI extends JFrame implements ActionListener{
 			room_seq = dao.Room_seqFinder(id);
 			
 			System.out.println(room_seq);
-			ProjectRoom pr = new ProjectRoom(room_seq);
+			ProjectRoom pr = new ProjectRoom(room_seq, id);
 			pr.setVisible(true);
 			this.setVisible(false);
 		}

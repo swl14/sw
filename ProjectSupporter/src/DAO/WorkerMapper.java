@@ -16,4 +16,6 @@ public interface WorkerMapper {
 	
 	public void numUpdate(Worker worker);
 	
+	public void leaderUpdate(Worker worker);
+	
 }

@@ -15,4 +15,8 @@ public interface RoomMapper {
 
 	public Room Room_seqFinder(String room_creater);
 
+	public Room RoomFinder(String room_seq);
+
+	public void roomUpdate(Room room);
+
 }

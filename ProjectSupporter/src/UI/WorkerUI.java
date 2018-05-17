@@ -106,6 +106,7 @@ public class WorkerUI extends JFrame implements ActionListener {
 				vo.setPhone_number(phone_number);
 				vo.setEmail(email);
 				vo.setRoom_seq("0");
+				vo.setLeader("0");
 				dao.insertWorker(vo);
 				JOptionPane.showMessageDialog(btnNewButton, "가입 완료");
 				this.setVisible(false);

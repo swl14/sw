@@ -91,4 +91,39 @@ public class RoomDAO {
 		return result;
 	}
 	
+	public Room RoomFinder(int room_seq) {
+		SqlSession session = null;
+		String input = String.valueOf(room_seq);
+		Room result = null;
+		try {
+			session = factory.openSession();
+			RoomMapper mapper = session.getMapper(RoomMapper.class);
+			result = mapper.RoomFinder(input);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return result;
+	}
+	public void leadUpdate(String resultLeader, int room_seq) {
+		// TODO Auto-generated method stub
+		SqlSession session = null;
+		Room room = new Room();
+		String input = String.valueOf(room_seq);
+		try {
+			session = factory.openSession();
+			RoomMapper mapper = session.getMapper(RoomMapper.class);
+			room = mapper.RoomFinder(input);
+			room.setLeader(resultLeader);
+			mapper.roomUpdate(room);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
 }

@@ -61,4 +61,26 @@ room_seq
 =#{room_seq}
 </select>
 
+<select id="RoomFinder" parameterType="String" resultType="Room">
+select
+room_seq
+, room_name
+, first_day
+, last_day
+, room_password
+, leader
+, room_creater
+from Room
+where room_seq = #{room_seq}
+</select>
+
+<update id="roomUpdate" parameterType="String">
+update
+Room
+set
+leader=#{leader}
+where
+room_seq=#{room_seq}
+</update>
+
 </mapper>

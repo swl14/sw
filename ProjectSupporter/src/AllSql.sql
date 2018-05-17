@@ -7,6 +7,7 @@ worker_seq varchar2(300) primary key
 , phone_number varchar2(300)
 , email varchar2(300)
 , room_seq varchar2(300)
+, leader varchar2(300)
 )
 
 create sequence worker_seq
@@ -47,4 +48,4 @@ create sequence joinwork_seq
 select * from room
 select * from work
 select * from worker
-drop table room
+drop table worker

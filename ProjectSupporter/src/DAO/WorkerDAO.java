@@ -127,4 +127,24 @@ public class WorkerDAO {
 		
 		return worker;
 	}
+
+	public void leaderChoice(int row, String id) {
+		// TODO Auto-generated method stub
+		SqlSession session = null;
+		String number = String.valueOf(row);
+		try {
+			session = factory.openSession();
+			WorkerMapper mapper = session.getMapper(WorkerMapper.class);
+			Worker worker = new Worker();
+			worker = mapper.idInsert(id);
+			worker.setLeader(number);
+			
+			mapper.leaderUpdate(worker);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
 }

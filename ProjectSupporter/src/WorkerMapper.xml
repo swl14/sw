@@ -16,6 +16,7 @@ worker_seq
 , phone_number
 , email
 , room_seq
+, leader
 ) values
 (
 worker_seq.nextval
@@ -25,6 +26,7 @@ worker_seq.nextval
 , #{phone_number}
 , #{email}
 , #{room_seq}
+, #{leader}
 )
 </insert>
 
@@ -37,6 +39,7 @@ worker_seq
 , phone_number
 , email
 , room_seq
+, leader
 from 
 	Worker
 where room_seq =#{room_seq}
@@ -53,7 +56,7 @@ id=#{id}
 
 <select id="idInsert" parameterType="Worker" resultType="Worker">
 select
-id, room_seq
+worker_seq, id, room_seq ,leader
 from
 Worker
 where id = #{id}	
@@ -62,6 +65,12 @@ where id = #{id}
 <update id="numUpdate" parameterType="Worker">
 update worker 
 set room_seq = #{room_seq}
+where id = #{id}
+</update>
+
+<update id="leaderUpdate" parameterType="Worker">
+update worker 
+set leader = #{leader}
 where id = #{id}
 </update>
 

@@ -22,11 +22,14 @@ public class WorkUI extends JFrame implements ActionListener {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private WorkDAO dao;
+	private int room_seq;
 	
-	public WorkUI() {
+	public WorkUI(int room_seq) {
 	dao = new WorkDAO();
+	this.room_seq = room_seq;
+	
 	setSize(320,400);
-	setLocation(900, 100);
+	setLocation(700, 200);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE); //현재창만 닫힘
 	getContentPane().setLayout(null);
 	
@@ -122,7 +125,7 @@ public class WorkUI extends JFrame implements ActionListener {
 			w.setPeople(people);
 			w.setDetail(detail);
 			w.setProgress("0");
-			w.setRoom_seq("0");
+			w.setRoom_seq(String.valueOf(room_seq));
 			dao.insertWork(w);
 			//등록 메서드 추가
 			setVisible(false);

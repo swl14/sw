@@ -10,7 +10,16 @@ public class Worker implements Serializable{
 	private String phone_number;
 	private String email;
 	private String room_seq;
+	private String leader;
 	
+	public String getLeader() {
+		return leader;
+	}
+
+	public void setLeader(String leader) {
+		this.leader = leader;
+	}
+
 	public Worker(String worker_seq, String name, String id, String password, String phone_number, String email,
 			String room_seq) {
 		super();
@@ -69,10 +78,13 @@ public class Worker implements Serializable{
 	public void setRoom_seq(String room_seq) {
 		this.room_seq = room_seq;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "¿Ã∏ß : " + name + ", id : " + id	;
+		return "Worker [worker_seq=" + worker_seq + ", name=" + name + ", id=" + id + ", password=" + password
+				+ ", phone_number=" + phone_number + ", email=" + email + ", room_seq=" + room_seq + ", leader="
+				+ leader + "]";
 	}
 	
+
 }

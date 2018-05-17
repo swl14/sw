@@ -24,13 +24,14 @@ public class WorkDAO {
 		}
 	}
 
-	public ArrayList<Work> WorkList() {
+	public ArrayList<Work> WorkList(int room_seq) {
 		SqlSession session = null;
 		ArrayList<Work> result = null;
+		String input = String.valueOf(room_seq);
 		try {
 			session = factory.openSession();
 			WorkMapper mapper = session.getMapper(WorkMapper.class);
-			result = mapper.WorkList();
+			result = mapper.WorkList(input);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,9 +60,7 @@ public class WorkDAO {
 		try {
 			session = factory.openSession();
 			WorkMapper mapper = session.getMapper(WorkMapper.class);
-			Work work = new Work();
-			System.out.println(work.getWork_seq());
-			mapper.deleteWork(work.getWork_seq());
+			mapper.deleteWork(work_seq);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,16 +68,15 @@ public class WorkDAO {
 			session.close();
 		}
 	}
-
-	public void detailWork(String work_seq) {
+	
+	public void finishWork(String room_seq) {
 		SqlSession session = null;
 		try {
-		session = factory.openSession();
-		WorkMapper mapper = session.getMapper(WorkMapper.class);
-		Work work = new Work();
-		mapper.detailWork();
-		session.commit();
-		} catch(Exception e) {
+			session = factory.openSession();
+			WorkMapper mapper = session.getMapper(WorkMapper.class);
+			mapper.finishWork(room_seq);
+			session.commit();
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			session.close();

@@ -92,7 +92,7 @@ public class LoginUI extends JFrame implements ActionListener {
 					SelectUI selectUI = new SelectUI(name);
 					selectUI.setVisible(true);
 					}else {
-						ProjectRoom projectroom = new ProjectRoom(Integer.parseInt(seq));
+						ProjectRoom projectroom = new ProjectRoom(Integer.parseInt(seq),name);
 					}
 					setVisible(false);
 				}else {
